@@ -99,10 +99,10 @@
         async function getWeather() {
             
             // Get the divs to display the weather info
-            const tempInfo = document.getElementById('divTemp')
-            const humidityInfo = document.getElementById('divHumidity')
-            const rainInfo = document.getElementById('divRain')
-            const isDayInfo = document.getElementById('divIsDay')
+            const txtTempInfo = document.getElementById('divTemp')
+            const txtHumidityInfo = document.getElementById('divHumidity')
+            const txtRainInfo = document.getElementById('divRain')
+            const txtIsDayInfo = document.getElementById('divIsDay')
 
             // API URL
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=36.1628&longitude=-85.5016&current=temperature_2m,relative_humidity_2m,is_day,precipitation,rain,showers,snowfall,cloud_cover&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&temperature_unit=fahrenheit&precipitation_unit=inch`
@@ -125,61 +125,61 @@
                 if (objData.current){
 
                 // Extracting weather data
-                const temperature = objData.current.temperature_2m
-                const humidity = objData.current.relative_humidity_2m
-                const rain = objData.current.precipitation
-                const isDay = objData.current.is_day
+                const objTemperature = objData.current.temperature_2m
+                const objHumidity = objData.current.relative_humidity_2m
+                const objRain = objData.current.precipitation
+                const objIsDay = objData.current.is_day
                 
                 // Creating icons based on temperature, humidity, and rain
-                let tempIcon
-                if (temperature >= 75) {
-                    tempIcon = `<i class="bi bi-thermometer-high fs-2 text-danger me-2"></i>`
-                } else if (temperature >= 50) {
-                    tempIcon = `<i class="bi bi-thermometer-half fs-2 text-warning me-2"></i>`
+                let iconTemp
+                if (objTemperature >= 75) {
+                    iconTemp = `<i class="bi bi-thermometer-high fs-2 text-danger me-2"></i>`
+                } else if (objTemperature >= 50) {
+                    iconTemp = `<i class="bi bi-thermometer-half fs-2 text-warning me-2"></i>`
                 } else {
-                    tempIcon = `<i class="bi bi-thermometer-low fs-2 text-primary me-2"></i>`
+                    iconTemp = `<i class="bi bi-thermometer-low fs-2 text-primary me-2"></i>`
                 }
 
-                let humidityIcon
-                if (humidity >= 75) {
-                    humidityIcon = `<i class="bi bi-droplet-fill fs-2 text-primary me-2"></i>`
-                } else if (humidity >= 50) {
-                    humidityIcon = `<i class="bi bi-droplet-half fs-2 text-primary me-2"></i>`
+                let iconHumidity
+                if (objHumidity >= 75) {
+                    iconHumidity = `<i class="bi bi-droplet-fill fs-2 text-primary me-2"></i>`
+                } else if (objHumidity >= 50) {
+                    iconHumidity = `<i class="bi bi-droplet-half fs-2 text-primary me-2"></i>`
                 } else {
-                    humidityIcon = `<i class="bi bi-droplet fs-2 text-primary me-2"></i>`
+                    iconHumidity = `<i class="bi bi-droplet fs-2 text-primary me-2"></i>`
                 }
 
-                let rainIcon
-                if (rain >= 0.5) {
-                    rainIcon = `<i class="bi bi-cloud-rain-heavy-fill fs-2 text-primary me-2"></i>`
-                } else if (rain >= 0.25) {
-                    rainIcon = `<i class="bi bi-cloud-rain-fill fs-2 text-primary me-2"></i>`
-                } else if (rain > 0) {
-                    rainIcon = `<i class="bi bi-cloud-rain fs-2 text-primary me-2"></i>`
-                } else if (rain == 0) {
-                    rainIcon = `<i class="bi bi-cloud fs-2 text-primary me-2"></i>`
+                let iconRain
+                if (objRain >= 0.5) {
+                    iconRain = `<i class="bi bi-cloud-rain-heavy-fill fs-2 text-primary me-2"></i>`
+                } else if (objRain >= 0.25) {
+                    iconRain = `<i class="bi bi-cloud-rain-fill fs-2 text-primary me-2"></i>`
+                } else if (objRain > 0) {
+                    iconRain = `<i class="bi bi-cloud-rain fs-2 text-primary me-2"></i>`
+                } else if (objRain == 0) {
+                    iconRain = `<i class="bi bi-cloud fs-2 text-primary me-2"></i>`
                 }
 
-                let isDayIcon
-                if (isDay == 1) {
-                    isDayIcon = `<i class="bi bi-brightness-high-fill fs-2 text-warning me-2">Day</i>`
+                let iconIsDay
+                if (objIsDay == 1) {
+                    iconIsDay = `<i class="bi bi-brightness-high-fill fs-2 text-warning me-2">Day</i>`
                 } else {
-                    isDayIcon = `<i class="bi bi-moon-stars-fill fs-2 text-wprimary me-2">Night</i>`
+                    iconIsDay = `<i class="bi bi-moon-stars-fill fs-2 text-wprimary me-2">Night</i>`
                 }
 
 
                 // Displaying weather info
-                tempInfo.innerHTML = `
-                    <p class="fs-2">${tempIcon}<strong>${temperature}°F</strong></p>
+                txtTempInfo.innerHTML = `
+                    <p class="fs-2">${iconTemp}<strong>${objTemperature}°F</strong></p>
                 `
-                humidityInfo.innerHTML = `
-                    <p class="fs-2">${humidityIcon}<strong>${humidity}%</strong></p>
+                txtHumidityInfo.innerHTML = `
+                    <p class="fs-2">${iconHumidity}<strong>${objHumidity}%</strong></p>
                 `
-                rainInfo.innerHTML = `
-                    <p class="fs-2">${rainIcon}<strong>Rain:</strong> ${rain} mm</p>
+                txtRainInfo.innerHTML = `
+                    <p class="fs-2">${iconRain}<strong>Rain:</strong> ${objRain} mm</p>
                 `
-                isDayInfo.innerHTML = `
-                    <p class="fs-2">${isDayIcon}</p>
+                txtIsDayInfo.innerHTML = `
+                    <p class="fs-2">${iconIsDay}</p>
                 `
                 }
                 
